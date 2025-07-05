@@ -1,0 +1,277 @@
+.successPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3a8a 0%, #6d28d9 50%, #312e81 100%);
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.successIcon {
+  width: 6rem;
+  height: 6rem;
+  margin: 0 auto 1.5rem auto;
+  background: #22c55e;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.subtitle {
+  font-size: 1.25rem;
+  color: #a5b4fc;
+  margin-bottom: 0.5rem;
+}
+.info {
+  color: #c7d2fe;
+}
+
+.ticketInfo {
+  background: rgba(255,255,255,0.08);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.ticketGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.participantDetails, .eventInfo {
+  background: rgba(59,130,246,0.12);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+.eventInfo {
+  background: rgba(253,224,71,0.12);
+}
+.sectionSubtitle {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.detailsList {
+  color: #a5b4fc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.qrGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.qrBlock {
+  background: rgba(255,255,255,0.08);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+.qrIcon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem auto;
+  background: #3b82f6;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.qrIconGift {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem auto;
+  background: #eab308;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.qrDesc {
+  color: #a5b4fc;
+  margin-bottom: 1rem;
+}
+.qrDescGift {
+  color: #fde68a;
+  margin-bottom: 1rem;
+}
+.attendanceButton {
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.attendanceButton:hover {
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+  transform: scale(1.05);
+  background: linear-gradient(to right, #2563eb, #1e40af);
+}
+.giftButton {
+  background: linear-gradient(to right, #a21caf, #f59e42);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.giftButton:hover {
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.2);
+  transform: scale(1.05);
+  background: linear-gradient(to right, #7c3aed, #f59e42);
+}
+
+.instructions {
+  background: rgba(255,255,255,0.08);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.sectionSubtitleCenter {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+}
+.instructionsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  text-align: center;
+}
+.instructionStep {
+  background: rgba(59,130,246,0.12);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+.instructionIcon {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto 0.75rem auto;
+  background: #3b82f6;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #fff;
+}
+.instructionTitle {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.instructionDesc {
+  color: #a5b4fc;
+  font-size: 0.95rem;
+}
+
+.navigation {
+  text-align: center;
+  margin-top: 2rem;
+}
+.printButton {
+  background: linear-gradient(to right, #a21caf, #6366f1);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  margin-right: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.printButton:hover {
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
+  transform: scale(1.05);
+  background: linear-gradient(to right, #6366f1, #a21caf);
+}
+.eventsButton {
+  background: linear-gradient(to right, #6b7280, #374151);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.eventsButton:hover {
+  box-shadow: 0 4px 16px rgba(55, 65, 81, 0.2);
+  transform: scale(1.05);
+  background: linear-gradient(to right, #374151, #6b7280);
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.refreshButton {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #6366f1, #2563eb);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.refreshButton:hover {
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+  transform: scale(1.05);
+  background: linear-gradient(to right, #2563eb, #1e40af);
+}
+.attendanceInfo {
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+.deactivateMsg {
+  color: #eab308;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+.waitingMsg {
+  color: #16a34a;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+} 

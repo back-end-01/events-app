@@ -1,0 +1,152 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fef9c3cc 0%, #021b7fcc 50%, #dbeafecc 100%);
+}
+
+.modalContent {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  max-width: 28rem;
+  width: 100%;
+  position: relative;
+  border-width: 4px;
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ringYellow {
+  border-color: #fde047;
+}
+.ringBlue {
+  border-color: #60a5fa;
+}
+.ringPurple {
+  border-color: #a78bfa;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  color: #9ca3af;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.closeButton:hover {
+  color: #374151;
+}
+
+.modalHeader {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #1e293b;
+  letter-spacing: 0.5px;
+}
+
+.modalSectionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Remove accent rings for a softer look */
+.ringYellow, .ringBlue, .ringPurple {
+  border: none;
+}
+
+/* For input/button layout inside modal */
+.modalInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid #a5b4fc;
+  background: #f3f4f6;
+  color: #1e293b;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.modalInput:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px #6366f133;
+}
+
+.modalError {
+  color: #dc2626;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  text-align: left;
+  width: 100%;
+}
+
+.modalButtonGroup {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.modalButton {
+  flex: 1;
+  background: linear-gradient(to right, #fde047, #fbbf24);
+  color: #1e293b;
+  font-weight: 600;
+  padding: 0.75rem 0;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.modalButton:hover {
+  background: linear-gradient(to right, #fbbf24, #fde047);
+}
+
+.modalButtonAlt {
+  flex: 1;
+  background: #312e81;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.75rem 0;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.modalButtonAlt:hover {
+  background: #4338ca;
+}
+
+.yellowText {
+  color: #b45309;
+}
+.blueText {
+  color: #2563eb;
+}
+.purpleText {
+  color: #a21caf;
+} 
