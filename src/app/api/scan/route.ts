@@ -1,13 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
 import { auth } from '../../../../auth';
+import { supabaseHelpers } from '../../../lib/supabase';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
-// POST /api/scan - Process QR code scan
+// POST /api/scan - Process QR code scan (Optimized)
 export async function POST(request: NextRequest) {
   const session = await auth();
   const user = session?.user;
@@ -18,12 +13,19 @@ export async function POST(request: NextRequest) {
   try {
     const { qrCode, volunteerId } = await request.json();
     
-    // Find participant by QR code
-    const { data: participant, error: participantError } = await supabase
-      .from('participants')
-      .select('*')
-      .eq('qr_code', qrCode)
-      .single();
+    if (!qrCode) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: 'QR code is required',
+          scanTime: new Date().toISOString()
+        },
+        { status: 400 }
+      );
+    }
+
+    // Find participant by QR code (with caching)
+    const { data: participant, error: participantError } = await supabaseHelpers.getParticipantByQR(qrCode);
     
     if (participantError || !participant) {
       return NextResponse.json(
@@ -36,11 +38,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Update participant status to scanned
-    const { error: updateError } = await supabase
-      .from('participants')
-      .update({ status: 'scanned' })
-      .eq('id', participant.id);
+    // Check if already scanned
+    if (participant.status === 'scanned') {
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: 'Participant already scanned',
+          scanTime: new Date().toISOString(),
+          participant
+        },
+        { status: 409 }
+      );
+    }
+
+    // Update participant status to scanned (with cache invalidation)
+    const { error: updateError } = await supabaseHelpers.updateParticipantStatus(participant.id, 'scanned');
 
     if (updateError) {
       console.error('Update error:', updateError);
@@ -54,25 +66,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Log the scan
-    const { error: logError } = await supabase
-      .from('scan_logs')
-      .insert([{
-        participant_id: participant.id,
-        volunteer_id: volunteerId,
-        status: 'success',
-        message: `Successfully scanned ${participant.name}`
-      }]);
-
-    if (logError) {
-      console.error('Log error:', logError);
-    }
+    // Log the scan (non-blocking)
+    const scanTime = new Date().toISOString();
+    supabaseHelpers.createScanLog({
+      participant_id: participant.id,
+      volunteer_id: volunteerId,
+      status: 'success',
+      scan_time: scanTime,
+      message: `Successfully scanned ${participant.name}`
+    }).catch(error => {
+      console.error('Scan log error (non-blocking):', error);
+    });
 
     // Create scan result
     const scanResult = {
       participantId: participant.id,
       participantName: participant.name,
-      scanTime: new Date().toISOString(),
+      scanTime,
       status: 'success' as const,
       message: `Successfully scanned ${participant.name}`,
       volunteerId
@@ -97,32 +107,13 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// GET /api/scan/stats - Get scanning statistics
+// GET /api/scan/stats - Get scanning statistics (Optimized)
 export async function GET() {
   try {
-    // Get total participants
-    const { count: totalParticipants } = await supabase
-      .from('participants')
-      .select('*', { count: 'exact', head: true });
+    // Use optimized helper with caching
+    const stats = await supabaseHelpers.getScanStats();
 
-    // Get participants by status
-    const { data: participants } = await supabase
-      .from('participants')
-      .select('status');
-
-    const scannedCount = participants?.filter(p => p.status === 'scanned').length || 0;
-    const checkedInCount = participants?.filter(p => p.status === 'checked-in').length || 0;
-    const registeredCount = participants?.filter(p => p.status === 'registered').length || 0;
-
-    return NextResponse.json({
-      stats: {
-        total: totalParticipants || 0,
-        scanned: scannedCount,
-        checkedIn: checkedInCount,
-        registered: registeredCount,
-        scanRate: totalParticipants && totalParticipants > 0 ? (scannedCount / totalParticipants * 100).toFixed(1) : '0'
-      }
-    });
+    return NextResponse.json({ stats });
   } catch (error) {
     console.error('Stats error:', error);
     return NextResponse.json(
